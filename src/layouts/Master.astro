@@ -1,0 +1,32 @@
+---
+import Head from "./Head.astro";
+import Nav from "./Nav.astro";
+import Chatbox from "./Chatbox.astro";
+import Header from "./Header.astro";
+import Sidebar from "./Sidebar.astro";
+import Script from "./Script.astro";
+import Footer from "./Footer.astro";
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <Head />
+  <body>
+    <div id="loader"></div>
+    <div id="main-wrapper">
+      <Nav />
+      <Chatbox />
+      <Header title={title} />
+      <Sidebar />
+      <div class="content-body default-height">
+        <div class="container-fluid">
+          <slot> Waiting for content ... </slot>
+        </div>
+      </div>
+      <Footer />
+    </div>
+    <Script />
+  </body>
+</html>
