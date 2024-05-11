@@ -1,0 +1,401 @@
+---
+import Layout from "../../layouts/Master.astro";
+const title = "Trading";
+---
+
+<Layout title={title}>
+  <link
+    rel="stylesheet"
+    href="/assets/vendor/datatables/css/jquery.dataTables.min.css"
+    class="main-css"
+  />
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="tradingview-widget-container">
+            <div id="tradingview_85dc0" class="tranding-chart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4">
+      <div class="card">
+        <div class="card-header border-0 pb-0">
+          <h4 class="heading">Margin Trade</h4>
+        </div>
+        <div class="card-body pt-4">
+          <form>
+            <div class="row g-3 mb-3">
+              <div class="col-xl-12">
+                <label class="form-label">From</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" />
+                  <button
+                    class="btn btn-outline-primary btn-outline-primary"
+                    type="button"
+                  >
+                    Max
+                  </button>
+                  <button
+                    class="btn btn-primary btn-outline-primary dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    USDT
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#!">BTC</a></li>
+                    <li><a class="dropdown-item" href="#!">ETH</a></li>
+                    <li><a class="dropdown-item" href="#!">BUSD</a></li>
+                    <li><a class="dropdown-item" href="#!">XRP</a></li>
+                    <li><a class="dropdown-item" href="#!">DOT</a></li>
+                    <li><a class="dropdown-item" href="#!">FIL</a></li>
+                    <li><a class="dropdown-item" href="#!">DOGE</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <label class="form-label">Price</label><input
+                  type="text"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-xl-12">
+                <label class="form-label">To</label>
+                <div class="input-group">
+                  <input type="text" class="form-control" />
+                  <button
+                    class="btn btn-primary btn-outline-primary dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    BTC
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="#!">BTC</a></li>
+                    <li><a class="dropdown-item" href="#!">ETH</a></li>
+                    <li><a class="dropdown-item" href="#!">BUSD</a></li>
+                    <li><a class="dropdown-item" href="#!">XRP</a></li>
+                    <li><a class="dropdown-item" href="#!">DOT</a></li>
+                    <li><a class="dropdown-item" href="#!">FIL</a></li>
+                    <li><a class="dropdown-item" href="#!">DOGE</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <label class="form-label">Expires in</label>
+                <select
+                  class="form-control default-select"
+                  aria-label="Default select example"
+                >
+                  <option>1 Day</option>
+                  <option value="1">2 Day</option>
+                  <option value="2">3 Day</option>
+                  <option value="3">4 Day</option>
+                </select>
+              </div>
+              <div class="col-xl-12">
+                <div class="d-flex flex-wrap justify-content-between mb-1">
+                  <div>Price</div>
+                  <div class="text-muted">1 BST = 55409.56000000 NSE</div>
+                </div>
+                <div class="d-flex flex-wrap justify-content-between">
+                  <div>Inverse Price</div>
+                  <div class="text-muted">1 NSE = 0.00001804 NSE</div>
+                </div>
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="btn flex-fill btn-success py-2 fs-5 text-uppercase px-5"
+            >
+              Place Order
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-8">
+      <div class="card">
+        <div class="card-header border-0 pb-0 flex-wrap">
+          <h4 class="heading">Trade Status</h4>
+          <nav>
+            <div class="order nav nav-tabs" id="nav-tab" role="tablist">
+              <button
+                class="nav-link active"
+                id="nav-order-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#nav-order"
+                type="button"
+                role="tab"
+                aria-selected="true"
+              >
+                Order
+              </button>
+              <button
+                class="nav-link"
+                id="nav-histroy-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#nav-history"
+                type="button"
+                role="tab"
+                aria-selected="false"
+              >
+                Order History
+              </button>
+              <button
+                class="nav-link"
+                id="nav-trade-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#nav-trade"
+                type="button"
+                role="tab"
+                aria-selected="false"
+              >
+                Trade Histroy
+              </button>
+            </div>
+          </nav>
+        </div>
+        <div class="card-body pt-3">
+          <div class="tab-content" id="nav-tabContent">
+            <div
+              class="tab-pane fade show active"
+              id="nav-order"
+              role="tabpanel"
+              aria-labelledby="nav-order-tab"
+            >
+              <div class="table-responsive dataTabletrade">
+                <table
+                  id="example"
+                  class="table shadow-hover display"
+                  style="min-width: 845px"
+                >
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Trade</th>
+                      <th>Side</th>
+                      <th>Price</th>
+                      <th>Amount</th>
+                      <th class="text-end">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>2022/04/25</td>
+                      <td>BTC</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$320,800</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                    <tr>
+                      <td>2022/07/25</td>
+                      <td>BTCUSD</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$170,750</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                    <tr>
+                      <td>2022/01/12</td>
+                      <td>INR</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$86,000</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                    <tr>
+                      <td>2022/03/29</td>
+                      <td>USD</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$433,060</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                    <tr>
+                      <td>2022/11/28</td>
+                      <td>BITCOIN</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$162,700</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                    <tr>
+                      <td>2022/12/02</td>
+                      <td>SEN</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$372,000</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="nav-history" role="tabpanel">
+              <div class="table-responsive dataTabletrade">
+                <table
+                  id="example7"
+                  class="table shadow-hover display"
+                  style="min-width: 845px"
+                >
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Trade</th>
+                      <th>Side</th>
+                      <th>Price</th>
+                      <th>Amount</th>
+                      <th class="text-end">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>2022/04/25</td>
+                      <td>BTC</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$320,800</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                    <tr>
+                      <td>2022/07/25</td>
+                      <td>BTCUSD</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$170,750</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                    <tr>
+                      <td>2022/01/12</td>
+                      <td>INR</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$86,000</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                    <tr>
+                      <td>2022/03/29</td>
+                      <td>USD</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$433,060</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                    <tr>
+                      <td>2022/11/28</td>
+                      <td>BITCOIN</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$162,700</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                    <tr>
+                      <td>2022/12/02</td>
+                      <td>SEN</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$372,000</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="nav-trade"
+              role="tabpanel"
+              aria-labelledby="nav-trade-tab"
+            >
+              <div class="table-responsive dataTabletrade">
+                <table
+                  id="example3"
+                  class="table shadow-hover display"
+                  style="min-width: 845px"
+                >
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Trade</th>
+                      <th>Side</th>
+                      <th>Price</th>
+                      <th>Amount</th>
+                      <th class="text-end">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>2022/04/25</td>
+                      <td>BTC</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$320,800</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                    <tr>
+                      <td>2022/07/25</td>
+                      <td>BTCUSD</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$170,750</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                    <tr>
+                      <td>2022/01/12</td>
+                      <td>INR</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$86,000</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                    <tr>
+                      <td>2022/03/29</td>
+                      <td>USD</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$433,060</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                    <tr>
+                      <td>2022/11/28</td>
+                      <td>BITCOIN</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$162,700</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                    <tr>
+                      <td>2022/12/02</td>
+                      <td>SEN</td>
+                      <td>BUY</td>
+                      <td>$20000</td>
+                      <td>$372,000</td>
+                      <td class="text-end">Trade</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+<script src="/assets/vendor/datatables/js/jquery.dataTables.min.js" is:inline
+></script>
+<script src="/assets/js/plugins-init/datatables.init.js" is:inline></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.2.0/wNumb.min.js"
+  is:inline></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.4/nouislider.min.js"
+  is:inline></script>
+<script src="https://s3.tradingview.com/tv.js" is:inline></script>
+<script src="/assets/js/dashboard/intraday.js" is:inline></script>
