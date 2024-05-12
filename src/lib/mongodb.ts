@@ -10,22 +10,13 @@ let cachedMongo;
 
 const connectToDB = async () => {
   const mongo = await new MongoClient(uri, options).connect();
-  // Change this to your own DB name of course.
-  // Or better yet, put it in your .env
   return mongo.db(import.meta.env.MONGODB_DB_NAME);
 };
 
 export const getDB = async () => {
-  // In development mode, use a global variable so that the value
-  // is preserved across module reloads caused by HMR (Hot Module Replacement).
-  // Text above copied from :
-  // https://github.com/vercel/next.js/blob/canary/examples/with-mongodb/lib/mongodb.ts
-
-  if (import.meta.env.NODE_ENV === "development") {
-    if (!global._mongoConnection) {
-      global._mongoConnection = await connectToDB();
-      cachedMongo = global._mongoConnection;
-    }
+  if (import.meta.env.PROD_ENV === "development") {
+    (global as any)._mongoConnection = await connectToDB();
+    cachedMongo = (global as any)._mongoConnection;
     return cachedMongo;
   }
   const mongo = await connectToDB();

@@ -9,7 +9,4 @@ export default defineConfig({
     mode: "standalone",
   }),
   integrations: [svelte()],
-  env: {
-    MONGODB_URI: process.env.MONGODB_URI,
-  },
 });

@@ -1,6 +1,6 @@
 ---
-import { getAllUsers } from "../../lib/users";
-import Layout from "../layouts/../../layouts/Master.astro";
+import { getAllUsers } from "@/lib/users";
+import Layout from "@/layouts/Master.astro";
 const users = await getAllUsers();
 if (!users) {
   return new Response(null, {
@@ -13,6 +13,6 @@ if (!users) {
 <Layout>
   <h1>Users1</h1>
   <ul>
-    {users.map((user) => <li>{user._id}</li>)}
+    {users.map((user: any) => <li>{user._id}</li>)}
   </ul>
 </Layout>

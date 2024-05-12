@@ -1,8 +1,24 @@
 ---
-import Layout from "../../layouts/Master.astro";
+import Layout from "@/layouts/Master.astro";
 import CreateUserForm from "@/components/CreateUserForm.svelte";
+
+const title = "Create User";
 ---
 
-<Layout>
-  <CreateUserForm />
+<Layout title={title}>
+  <!-- row -->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">New User</h4>
+        </div>
+        <div class="card-body">
+          <div class="basic-form">
+            <CreateUserForm client:idle />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </Layout>
