@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import crypto from "crypto";
 
 export function randStr(length: number) {
   let result = "";
@@ -13,24 +13,43 @@ export function randStr(length: number) {
   return result;
 }
 
-
-export function getSignatureBitget(timestamp:string, method:string, requestPath:string, queryString:string, body:string, secretKey:string) {
+export function getSignatureBitget(
+  timestamp: string,
+  method: string,
+  requestPath: string,
+  queryString: string,
+  body: string,
+  secretKey: string
+) {
   let prehashString = timestamp + method.toUpperCase() + requestPath;
 
   if (queryString) {
-    prehashString += '?' + queryString;
+    prehashString += "?" + queryString;
   }
 
   if (body) {
     prehashString += body;
   }
 
-  const hmac = crypto.createHmac('sha256', secretKey);
-  const signature = hmac.update(prehashString).digest('base64');
+  const hmac = crypto.createHmac("sha256", secretKey);
+  const signature = hmac.update(prehashString).digest("base64");
 
   return signature;
 }
 
-export function getSignatureBybit(queryString:string, secret:string, apiKey:string, timestamp:string, recvWindow:string) {
-  return crypto.createHmac('sha256', secret).update(timestamp + apiKey + recvWindow + queryString).digest('hex');
+export function getSignatureBybit(
+  queryString: string,
+  secret: string,
+  apiKey: string,
+  timestamp: string,
+  recvWindow: string
+) {
+  return crypto
+    .createHmac("sha256", secret)
+    .update(timestamp + apiKey + recvWindow + queryString)
+    .digest("hex");
+}
+
+export function getSignatureIndodax(queryString: string, secret: string) {
+  return crypto.createHmac("sha512", secret).update(queryString).digest("hex");
 }

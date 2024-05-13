@@ -1,0 +1,37 @@
+---
+import TableDatatableFuture from "@/components/TableDatatableFuture.svelte";
+import Layout from "@/layouts/Master.astro";
+import { getAccountList } from "@/lib/bitget/futures";
+
+async function fetchData() {
+  try {
+    const data = await getAccountList("COIN-FUTURES");
+    return data.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+}
+
+const dataCoinFutures = await fetchData();
+
+const title = "Futures Wallet - Bitget";
+---
+
+<link
+  rel="stylesheet"
+  href="/assets/vendor/datatables/css/jquery.dataTables.min.css"
+/>
+<Layout title={title}>
+  <div class="row">
+    <!-- column -->
+    <div class="col-xl-12">
+      <TableDatatableFuture {dataCoinFutures} />
+    </div>
+  </div>
+</Layout>
+<script src="/assets/vendor/peity/jquery.peity.min.js" is:inline></script>
+<script src="/assets/js/user.js" is:inline></script>
+<script src="/assets/vendor/datatables/js/jquery.dataTables.min.js" is:inline
+></script>
+<script src="/assets/js/plugins-init/datatables.init.js" is:inline></script>

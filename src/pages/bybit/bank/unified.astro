@@ -1,0 +1,36 @@
+---
+import TableDatatableUnified from "@/components/TableDatatableUnified.svelte";
+import Layout from "@/layouts/Master.astro";
+import { getAllCoinsBalance } from "@/lib/bybit/unified";
+
+async function fetchData() {
+  try {
+    const data = await getAllCoinsBalance("UNIFIED");
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+}
+
+const dataCoinUnified = await fetchData();
+const title = "Unified Wallet - Bybit";
+---
+
+<link
+  rel="stylesheet"
+  href="/assets/vendor/datatables/css/jquery.dataTables.min.css"
+/>
+<Layout title={title}>
+  <div class="row">
+    <!-- column -->
+    <div class="col-xl-12">
+      <TableDatatableUnified {dataCoinUnified} />
+    </div>
+  </div>
+</Layout>
+<script src="/assets/vendor/peity/jquery.peity.min.js" is:inline></script>
+<script src="/assets/js/user.js" is:inline></script>
+<script src="/assets/vendor/datatables/js/jquery.dataTables.min.js" is:inline
+></script>
+<script src="/assets/js/plugins-init/datatables.init.js" is:inline></script>
